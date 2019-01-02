@@ -2,9 +2,16 @@ require_relative 'mkmf.rb'
 
 extension_name = 'rbcuda'
 
+def gsl_dir_config(target, idir = nil, ldir = idir)
+  dir_config(target, idir || $sitearchdir, ldir || $sitearchdir)
+end
+
+gem 'nmatrix'
 nmatrix_path = Gem::Specification.find_all_by_name('nmatrix').compact
 abort "Cannot locate NMatrix installation" unless nmatrix_path
 nmatrix_header_dir = File.join(nmatrix_path[0].require_path)
+# $LOCAL_LIBS += " -l:nmatrix.so"
+gsl_dir_config('nmatrix', nmatrix_header_dir)
 
 narray_path = Gem::Specification.find_by_path('narray').full_gem_path
 abort "Cannot locate NArray installation" unless narray_path
@@ -26,6 +33,8 @@ INCLUDEDIR  = RbConfig::CONFIG['includedir']
 HEADER_DIRS = [
   '/opt/local/include',
   '/usr/local/include',
+  '/usr/local/cuda/include',
+  '/usr/include/atlas',
   INCLUDEDIR,
   '/usr/include',
   nmatrix_header_dir,
@@ -46,8 +55,10 @@ have_library('cudart')
 have_library('cublas')
 have_library('cusolver')
 have_library('curand')
+have_library('narray')
+have_header('nmatrix.h')
 have_header("nmatrix_config.h")
-have_header("narray.h")
+have_library('nmatrix')
 abort "Cannot locate NMatrix header files : nmatrix.h" unless find_header("nmatrix.h")
 
 

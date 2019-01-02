@@ -35,7 +35,7 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rake-compiler', '~>0.8'
   spec.add_development_dependency "minitest", "~> 5.0"
   spec.add_development_dependency 'pry', '~>0.10'
-  spec.add_development_dependency 'nmatrix', '~> 0.2.1'
+  spec.add_development_dependency 'nmatrix', '~> 0.2.4'
   spec.add_development_dependency 'narray', '~> 0.6.1.2'
   spec.add_development_dependency 'rdoc', '~>4.0', '>=4.0.1'
 end

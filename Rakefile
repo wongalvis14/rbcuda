@@ -5,8 +5,8 @@ require "rdoc/task"
 
 Rake::ExtensionTask.new do |ext|
   ext.name = 'rbcuda'
-  ext.ext_dir = 'ext/rbcuda/'
-  ext.lib_dir = 'lib/'
+  ext.ext_dir = 'ext/rbcuda'
+  ext.lib_dir = 'lib'
   ext.source_pattern = '**/*.{c,cpp, h}'
 end
 
